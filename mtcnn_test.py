@@ -5,7 +5,7 @@ from mtcnn import MTCNN
 import cv2
 import numpy as np
 
-detector = MTCNN()
+detector = MTCNN(device='cpu')
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
