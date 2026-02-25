@@ -40,7 +40,7 @@ IMG_SIZE = 224
 IMG_CHANNELS = 3  # RGB
 
 # Face detection
-FACE_DETECTION_METHOD = 'haar'  # Options: 'haar', 'mtcnn'
+FACE_DETECTION_METHOD = 'mtcnn'  # Options: 'haar', 'mtcnn' | MTCNN recommended for production (100% vs 92.5% accuracy)
 HAAR_CASCADE_PATH = 'haarcascade_frontalface_default.xml'
 FACE_PADDING = 0.2  # 20% padding around detected face
 MIN_FACE_SIZE = (30, 30)  # Minimum face size to detect
@@ -64,10 +64,10 @@ AUGMENTATION = {
 # ============================================================================
 # Available model architectures
 AVAILABLE_MODELS = ['resnet18', 'resnet34', 'mobilenet_v2', 'efficientnet_b0']
-DEFAULT_MODEL = 'resnet18'
+DEFAULT_MODEL = 'mobilenet_v2'  # MobileNetV2: 92% accuracy, 2.26M params, optimal for real-time
 
 # Training mode
-TRAINING_MODE = 'scratch'  # Options: 'scratch', 'finetune'
+TRAINING_MODE = 'finetune'  # Options: 'scratch', 'finetune' | Finetune recommended for transfer learning
 
 # Model-specific configurations
 MODEL_CONFIG = {
@@ -92,10 +92,10 @@ MODEL_CONFIG = {
 # ============================================================================
 # TRAINING CONFIGURATION
 # ============================================================================
-# Training hyperparameters
-BATCH_SIZE = 32
-NUM_EPOCHS = 50
-LEARNING_RATE = 0.001
+# Training hyperparameters (Optimized for MobileNetV2)
+BATCH_SIZE = 32  # Optimal batch size for speed/accuracy balance
+NUM_EPOCHS = 30  # 30 epochs recommended for finetuning, increase if training from scratch
+LEARNING_RATE = 0.001  # Optimal learning rate for Adam optimizer
 WEIGHT_DECAY = 1e-4
 
 # Learning rate scheduler
